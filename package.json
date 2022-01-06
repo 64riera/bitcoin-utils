@@ -1,0 +1,21 @@
+{
+  "name": "bitcoin-mempool-practice",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "bitcoin-mempool": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Rivera",
+  "license": "ISC",
+  "dependencies": {
+    "@mempool/mempool.js": "^2.3.0-dev1",
+    "commander": "^8.3.0",
+    "jimp": "^0.16.1",
+    "rimraf": "^3.0.2"
+  }
+}
