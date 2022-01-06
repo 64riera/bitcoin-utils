@@ -1,5 +1,5 @@
 import {addresses} from "../config/index.js";
-import {print} from "./utils.js";
+import {cleanTxInformation, loader, print} from "./utils.js";
 
 
 /**
@@ -8,16 +8,17 @@ import {print} from "./utils.js";
  * @param {string} addressId
  */
 export async function getAddressInformation(addressId) {
+  loader.start()
   let data
   try {
     data = await addresses.getAddress({address: addressId})
     data.transactions = (await addresses.getAddressTxs({address: addressId})).map((transaction) => {
-      delete transaction.vin
-      delete transaction.vout
-      return transaction
+      return cleanTxInformation(transaction)
     })
+    loader.succeed()
   } catch (err) {
     data = err.response.data
+    loader.fail()
   }
   print(data)
 }
