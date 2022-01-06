@@ -1,9 +1,11 @@
+import dotenv from 'dotenv'
 import mempoolJS from '@mempool/mempool.js'
 import program from "commander";
 
-export const bitcoinNetwork = 'bitcoin'
+dotenv.config();
+export const bitcoinNetwork = process.env.BITCOIN_NETWORK
 export const { bitcoin: { addresses, transactions }, bitcoin } = mempoolJS({
-  hostname: 'mempool.space',
+  hostname: process.env.MEMPOOL_HOST,
   network: bitcoinNetwork
 })
 

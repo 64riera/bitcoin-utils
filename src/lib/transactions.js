@@ -1,5 +1,5 @@
 import {transactions} from "../config/index.js";
-import {print} from "./utils.js";
+import {print, cleanTxInformation, loader} from "./utils.js";
 
 /**
  * Returns information from given transaction id
@@ -7,11 +7,15 @@ import {print} from "./utils.js";
  * @param {string} txId
  */
 export async function getTransactionInformation(txId) {
+  loader.start()
   let data
   try {
-    data = await transactions.getTx({ txid: txId })
+    const transaction = await transactions.getTx({ txid: txId })
+    data = cleanTxInformation(transaction)
+    loader.succeed()
   } catch (err) {
     data = err.response.data
+    loader.fail()
   }
   print(data)
 }
